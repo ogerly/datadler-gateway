@@ -1,0 +1,46 @@
+{
+  "name": "datadler-gateway",
+  "description": "A Dat-to-HTTP gateway and helper library.",
+  "version": "1.0.0-beta",
+  "main": "index.js",
+  "bin": "bin.js",
+  "scripts": {
+    "start": "./bin.js",
+    "test": "standard && dependency-check . --unused --no-dev && mocha"
+  },
+  "dependencies": {
+    "dat-librarian": "^1.1.2-alpha",
+    "hex-to-32": "^2.0.0",
+    "hyperdrive-http": "^4.3.4",
+    "websocket-stream": "^5.1.2",
+    "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "dependency-check": "^2.9.1",
+    "mocha": "^5.0.0",
+    "rimraf": "^2.6.3",
+    "random-access-memory": "^2.4.0",
+    "standard": "^10.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ogerly/datadler-gateway.git"
+  },
+  "keywords": [
+    "dat",
+    "http",
+    "https"
+  ],
+  "authors": [
+    "Alexander Friedland <fridolin@tutanota.com>"
+  ],
+  "fork-repository": {
+    "type": "git",
+    "url": "git+https://github.com/garbados/dat-gateway.git"
+  },
+  "fork-authors": [
+    "Paul Frazee <pfrazee@gmail.com>",
+    "Diana Thayer <garbados@gmail.com>"
+  ],
+  "license": "Apache-2.0"
+}

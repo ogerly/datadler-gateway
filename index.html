@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html style="background-color: #eee">
+<head>
+    <meta charset="utf-8"/>
+  <title>dat-gateway</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cash/4.1.5/cash.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/bulma@0.7.4/css/bulma.css">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.css">
+  <script>
+    function handleLoaded() {
+      registerProtocol();
+      autoNavigate();
+    }
+
+    function registerProtocol() {
+      console.log('function registerProtocol')
+      try {
+        navigator.registerProtocolHandler(
+          "dat",
+          location.href + "?url=%s",
+          "Dat Gateway Redirection"
+        )
+      } catch(e) {
+        console.error("Couldn't register protocol handler");
+        console.error(e);
+      }
+    }
+
+    function getFileExtension(filename) {
+      return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+    }
+
+    function autoNavigate() {
+      console.log('function autoNavigate')
+       // Attempt to load the Dat URL from the querystring
+      var parsedURL = new URL(window.location.href)
+      var toNavigate = parsedURL.searchParams.get("url")
+      if (toNavigate) {
+        document.querySelector("input").value = toNavigate;
+      }
+    }
+
+    function navigateUrl() {
+      console.log('function navigateUrl')
+      var url = document.querySelector("input").value;
+      var cleaned = url.replace(/^dat:\/\//, "");
+     // window.location.href = "/" + cleaned;
+      $('#datimage').attr("src", "/"+cleaned)
+      return false;
+    }
+  </script>
+</head>
+<body onload="return handleLoaded()">
+  <section class="section">
+    <div class="container box" style="max-width:480px">
+      <h1 class="title">datadler-gateway</h1>
+      <p class="subtitle">Portal zu deinem dezentralen Web</p>
+      <img src="https://datadler.hashbase.io/images/datadler_700.jpg" height="390px">
+      
+      <div class="content">
+          <p>Sie können dieses Gateway verwenden, um Inhalte zu besuchen, die über das p2p <a href="https://datproject.org/">Dat</a> Protokoll gehostet werden.</p>
+           <p>Geben Sie die Dat-Schlüssel in der URL wie folgt ein: <code>/:key/:path</:path</code> oder verwenden Sie das untenstehende Formular.</p>
+               
+        <p>
+         <b>Beispiel dat://Adresse zu unserem Bild</b>
+           <small id="exampleurl" onclick="$('.input').val( this.text())" style="word-break: break-word">dat://a21b6ddf920cfad431a0dd08e08755f890922c7425cc20f542b0558c5b0aabdf/datadler_700.jpg
+          </small>
+          <button class="button is-small is-fullwidth" style="word-break: break-word"> 
+            <small onclick="$('.input').val( $('#exampleurl').text())" >ausprobieren
+            </small></button>
+
+         </p>
+        <p>
+          <form onsubmit="return navigateUrl()">
+            <div class="field has-addons">
+              <div class="control is-expanded">
+                <input class="input" placeholder="dat://">            
+              </div>
+              <div class="control">
+                <button class="button is-info">Los!</button>
+              </div>
+            </div>
+          </form>
+        </p>
+        <p>
+            <article class="message">
+                <div class="message-header">
+                  <p>Vorschau</p>
+                </div>
+                <div class="message-body">
+                  <img id="datimage" src=""/>
+                 </div>
+              </article>
+        </p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
