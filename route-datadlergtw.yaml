@@ -1,0 +1,34 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: datadlergtw
+  namespace: datadler-gateway
+  selfLink: /apis/route.openshift.io/v1/namespaces/datadler-gateway/routes/datadlergtw
+  uid: b5712759-1c49-11ea-9809-0a580a820100
+  resourceVersion: '104078846'
+  creationTimestamp: '2019-12-11T19:09:09Z'
+  labels:
+    app: datadlergtw
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  host: datadlergtw-datadler-gateway.apps.ca-central-1.starter.openshift-online.com
+  subdomain: ''
+  to:
+    kind: Service
+    name: datadlergtw
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: >-
+        datadlergtw-datadler-gateway.apps.ca-central-1.starter.openshift-online.com
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2019-12-11T19:09:09Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: apps.ca-central-1.starter.openshift-online.com
